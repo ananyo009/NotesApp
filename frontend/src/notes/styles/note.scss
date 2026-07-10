@@ -1,0 +1,36 @@
+.note{
+                height: 150px;
+                width: 300px;
+                background-color: var(--form);
+                border: 2px solid var(--border);
+                display: flex;
+                flex-wrap: wrap;
+                word-break:normal;
+                text-align: left;
+                flex-direction: column;
+                align-items: center;
+                gap:20px;
+                padding: 10px 5px;
+                border-radius: 10px;
+                overflow-y: scroll;
+                
+            }
+
+.butt{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap:30px;
+    .edit{
+        background-color: var(--form);
+        outline: none;
+        border:2px solid yellow ;
+        cursor: pointer;
+    }
+    .remove{
+        background-color: var(--form);
+        outline: none;
+        border: 2px solid red;
+        cursor: pointer;
+    }
+}

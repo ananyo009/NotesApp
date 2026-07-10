@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html , body{
+    height: 100%;
+    width: 100%;
+    background-color: var(--back);
+    background-repeat: no-repeat;
+}
+
+:root{
+    --back:#060913;
+    --notes:#0f1422;
+    --border:#1e293b;
+    --form:#0b0e17;
+    --input:#161b2b;
+    --input-bor:#242f49;
+    --input-txt:#e2e8f0;
+    --form-con:#00f0ff;
+    --btn:#ff007f;
+    --btn-txt:#ffffff;
+
+
+}

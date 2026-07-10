@@ -1,0 +1,107 @@
+.main{
+    height:100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:var(--back);
+    .form-elem{
+    height: 25rem;
+    width: 30rem;
+    background-color:var(--form);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap:20px; 
+        box-shadow: 2px 3px 3px var(--form-con);
+        border-radius: 10px;
+        h1{
+            color:var(--form-con);
+        }
+        .form-tag{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap:20px;
+        
+            .pass{
+                display: flex;
+                align-items: center;
+                gap:15px;
+                padding-left: 39px;
+                background-color: var(--form);
+                button{
+                    background-color: rgba(139, 69, 19, 0);
+                    border: none;
+                    outline: none;
+                    cursor: pointer;
+                .eye{
+                    color: var(--form-con);
+                    font-size: 25px;
+                }
+            }
+                }
+
+            .input{
+                background-color: var();
+                font-size: 25px;
+                border: none;
+                border-radius: 10px;
+                outline: none;
+                padding: 4px 6px; 
+                background-color: var(--input);
+                color: var(--input-txt);
+                border: 1px solid var(--input-bor);
+            }
+
+            .input:focus{
+                outline: 3px solid #00f0ff;
+                offset: 0.25rem;
+               
+            }
+
+            .btn{
+                padding: 0.5rem 2rem;
+                background-color:var(--btn);
+                color:var(--btn-txt);
+                cursor: pointer;
+                font-size: 1.5rem;
+                border-radius: 5px;
+                border: none;
+                box-shadow: 3px 2px 2px rgb(173, 3, 117);
+            }
+            .btn:active{
+                transform: scale(0.96);
+                box-shadow: 1px 1px 1px rgb(177, 9, 121);
+            }
+        }
+    }
+}
+p{
+    color: red;
+}
+h3{
+    color:var(--btn)
+}
+.link{
+    color:var(--form-con);
+    text-decoration: none;
+}
+
+@media screen and (max-width:880px) {
+    .main{
+        .form-elem{
+            margin: 0px 20px;
+            height: 20rem;
+            width: 20rem;
+            .form-tag{
+                width: 100%;
+                .input{
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}
