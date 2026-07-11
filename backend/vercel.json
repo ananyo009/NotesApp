@@ -11,5 +11,11 @@
       "source": "/(.*)",
       "destination": "server.js"
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
