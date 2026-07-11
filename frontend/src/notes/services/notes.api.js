@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: "http://localhost:3000/notesApp/notes",
-    withCredentials:true
+  baseURL: "https://notes-app-seven-lyart.vercel.app",
+  withCredentials: true,
 });
 
 export async function createnote(title,description){
