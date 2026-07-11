@@ -30,6 +30,10 @@ app.use(cookieParser())
 
 app.use('/notesApp/auth', AuthRouter)
 
-app.use('/notesApp/notes',notesRouter)
+app.use('/notesApp/notes', notesRouter)
+
+app.get('/',(req,res)=> {
+  res.redirect("/notesApp/auth/login");
+})
 
 module.exports = app;
