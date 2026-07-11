@@ -20,7 +20,7 @@ app.use(errorHandler)
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://notes-app-j8te.vercel.app/",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   }),

@@ -6,7 +6,8 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form'
 import { useAuth } from '../hook/useAuth'
 import { useNavigate } from 'react-router';
-import {Link} from 'react-router'
+import { Link } from 'react-router'
+import "../../app.scss"
 
 const Register = () => {
     console.log("rendering");
@@ -36,7 +37,7 @@ const Register = () => {
     if (loading) {
         return (
             <div className='main'>
-                <h1>Loading.....</h1>
+                <h1 className='load'>Loading.....</h1>
             </div>
         )
     }
