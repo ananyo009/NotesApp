@@ -20,7 +20,7 @@ app.use(errorHandler)
 
 app.use(
   cors({
-    origin: "https://notes-app-j8te.vercel.app/",
+    origin: "https://notes-app-j8te.vercel.app",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   }),
@@ -32,8 +32,8 @@ app.use('/notesApp/auth', AuthRouter)
 
 app.use('/notesApp/notes', notesRouter)
 
-app.get('/',(req,res)=> {
-  res.redirect("/notesApp/auth/login");
-})
+// app.get('/',(req,res)=> {
+//   res.redirect("/notesApp/auth/login");
+// })
 
 module.exports = app;
