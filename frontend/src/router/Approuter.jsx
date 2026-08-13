@@ -14,15 +14,16 @@ export const Approuter = createBrowserRouter([
     path: '/login',
         element: <Login />
     },
+     {
+                path: '/register',
+                element: <Register />
+            },
     {
         element: <ProtectedRoute />,
         children: [
             {
                 path: '/home',
                 element: <Home />
-            }, {
-                path: '/register',
-                element: <Register />
             }
         ]
     }])
