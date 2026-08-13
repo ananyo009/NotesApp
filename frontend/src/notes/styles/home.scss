@@ -4,21 +4,42 @@
     background-color: var(--back);
     display: flex;
     flex-direction: column;
-    .nav{
-        height: 100px;
+    .nav-bar{
+        height: 15%;
         width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding:20px;
-        margin-top:50px;
+        padding: 0rem 2rem;
+    .nav{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap:0.6rem;
         h1{
             color: var(--form-con);
         }
         h2{
+            font-size: 2rem;
             color: var(--form-con);
         }
     }
+    .logout{
+        height: 40px;
+        font-size: 1.2rem;
+        padding: 2px 5px;
+        background-color: red;
+        color:white;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        &:active{
+            transform: scale(0.96);
+        }
+    }
+}
     .form-container{
         padding: 10px;
         height: 100%;
@@ -110,11 +131,14 @@
 }
 }
 
-@media (max-width:990px) {
+@media (max-width:800px) {
     .main{
         width: 100%;
-        .nav{
-            margin-top: 40px;
+        .nav-bar{
+            margin-top: 80px;
+            .nav{
+                margin-top: 70px;
+            }
         }
     .form-container{
         display: flex;

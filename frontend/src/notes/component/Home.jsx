@@ -4,17 +4,18 @@ import { useNote } from '../hooks/useNote.js'
 import { useAuth } from '../../auth/hook/useAuth.js'
 import { useForm } from 'react-hook-form'
 import Note from './Note.jsx'
+import { useNavigate } from 'react-router'
   
 const Home = () => {
 
     const { register, handleSubmit, reset } = useForm();
 
-    const { user, handlegetme } = useAuth();
+    const { user, handlegetme, handlelogout } = useAuth();
    
     const { handlecreateNote, handlereadnote,handledeletenote, Loading, notes , handleUpdatenote} = useNote();
     
     
-    
+    const navigate = useNavigate()
     
 
      async function create(data) {
@@ -30,6 +31,11 @@ const Home = () => {
     async function updateNote(noteid,description) {
         await handleUpdatenote(noteid, description);
     }
+
+    async function logoutuser() {
+        await handlelogout();
+        navigate("/login");
+    }
     
     useEffect(() => {
       handlereadnote();
@@ -41,17 +47,23 @@ const Home = () => {
         return (<h1 style={{color:"white"}}>Loading ...</h1>)
     }
 
+
+
     
 
     console.log(notes);
     
 
     return (
-      <div className='main'>
-          <div className='nav'>
+        <div className='main'>
+            <div className='nav-bar'>
+                <div className='nav'>
               <h1>NotesApp</h1>
-              <h2>Welcome {user?.username} </h2>
-          </div>
+              <h2>{user?.username} </h2>
+                </div> 
+                <button  onClick={logoutuser} className="logout">logout</button>
+            </div>
+         
           <div className='form-container'>
               <form className='form-box' onSubmit={handleSubmit((data)=>create(data))}>
                   <label>Title:</label>

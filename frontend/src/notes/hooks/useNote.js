@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { notecontext } from '../notes.context.jsx'
-import {readnote ,createnote, deletenote, updatenote} from '../services/notes.api.js'
+import { readnote, createnote, deletenote, updatenote } from '../services/notes.api.js'
 
 
 
@@ -56,6 +56,8 @@ export const useNote = () => {
       setLoading(false);
     }
   }
+
+  
     
 
 

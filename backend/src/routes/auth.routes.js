@@ -16,7 +16,9 @@ AuthRouter.post('/register', registerValidationRules  ,authController.register)
 AuthRouter.post('/login', authController.login)
 
 
-AuthRouter.get('/getme',identifyUser,authController.getme)
+AuthRouter.get('/getme', identifyUser, authController.getme);
+
+AuthRouter.get("/logout",authController.logout)
 
 
 

@@ -12,7 +12,9 @@ import "../../app.scss"
 const Login = () => {
     console.log("rendering");
 
-    const {loading,user,handlelogin,handlegetme} = useAuth()
+  const { loading, user, handlelogin, handlegetme } = useAuth()
+  
+  const [error, seterror] = useState("");
 
   const { handleSubmit, register, reset, formState: { errors } } = useForm();
   
@@ -26,12 +28,16 @@ const Login = () => {
         setVisible(!Visible);
     }
 
-    const login = async(data) => {
-        const {username , password} = data
-        await handlelogin(username, password);
-        reset();
-
-        navigate('/home')
+  const login = async (data) => {
+    try {
+      const { username, password } = data
+      await handlelogin(username, password);
+      reset();
+      navigate('/home')
+    }
+        catch(err) {
+      seterror("invalid credentials");
+        }
         
     }
 
@@ -49,14 +55,11 @@ const Login = () => {
     <div className="main">
       <div className="form-elem">
         <h1>Login</h1>
+        <p>{error}</p>
         <form onSubmit={handleSubmit(login)} className="form-tag">
           <input
             {...register("username", {
               required: true,
-              minLength: {
-                value: 6,
-                message: "atleast 6 letters required",
-              },
             })}
             className="input"
             type="text"
@@ -67,11 +70,6 @@ const Login = () => {
             <input
               {...register("password", {
                 required: true,
-                pattern: {
-                  value:
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                  message: "password is not strong",
-                },
               })}
               className="input"
               placeholder="enter your password"
