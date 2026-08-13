@@ -72,11 +72,6 @@ const Register = () => {
             <input
               {...register("password", {
                 required: true,
-                pattern: {
-                  value:
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                  message: "password is not strong",
-                },
               })}
               className="input"
               placeholder="enter your password"
