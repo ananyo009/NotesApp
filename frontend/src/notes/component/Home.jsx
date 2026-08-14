@@ -51,7 +51,7 @@ const Home = () => {
 
     
 
-    console.log(notes);
+    // console.log(notes);
     
 
     return (

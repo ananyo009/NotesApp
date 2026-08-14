@@ -12,7 +12,9 @@ import "../../app.scss"
 const Register = () => {
     console.log("rendering");
 
-    const {loading,user,handleregister} = useAuth()
+  const { loading, user, handleregister } = useAuth()
+  
+  const [err, seterr] = useState("");
 
     const { handleSubmit, register,reset, formState: { errors } } = useForm();
     
@@ -25,12 +27,18 @@ const Register = () => {
         setVisible(!Visible);
     }
 
-    const login = async(data) => {
-        const {email, username , password} = data
-        await handleregister(email,username, password);
-        reset();
+  const login = async (data) => {
+    try {
+      const { email, username, password } = data
+      await handleregister(email, username, password);
+      reset();
 
-        navigate('/login')
+      navigate('/home')
+    } catch (err) {
+      if (err.response && err.response.data && err.response.data.message) {
+        seterr(err.response.data.message);
+      }
+    }
         
     }
 
@@ -48,6 +56,7 @@ const Register = () => {
     <div className="main">
       <div className="form-elem">
         <h1>Register</h1>
+        <p>{err}</p>
               <form onSubmit={handleSubmit(login)} className="form-tag">
                   <input className='input' {...register("email", {
                       required: true,

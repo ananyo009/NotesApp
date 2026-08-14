@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { Authcontext } from '../auth.context.jsx'
 import { login, register, getMe, logout } from "../service/auth.api.js"
+import { useEffect } from "react";
+import axios from "axios";
 
 
 export const useAuth = () => {
@@ -26,31 +28,44 @@ export const useAuth = () => {
       setLoading(true);
       const response = await register(email, username, password);
       setUser(response.user);
-      setLoading(false);
     }
     catch (err) {
       throw err;
+    } finally {
+      setLoading(false)
     }
      };
 
   const handlegetme = async () => {
+    setLoading(true);
     try {
-         
-      setLoading(true);
       const response = await getMe();
       setUser(response.user);
-      setLoading(false);
     } catch (err) {
-      throw err;
+      setUser(null);
+      console.error('Get user failed:', err);
+    } finally {
+      setLoading(false);
     }
   }
 
   async function handlelogout() {
-    await logout();
+    try {
+      await logout();
+    } catch (err) {
+      console.error('Logout failed:', err);
+    } finally {
+      setUser(null);
+    }
   }
     
     return {
-        user , loading, handlelogin , handleregister , handlegetme, handlelogout
-    }
+      user,
+      loading,
+      handlelogin,
+      handleregister,
+      handlegetme,
+      handlelogout,
+    };
 
 }

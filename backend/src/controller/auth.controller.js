@@ -113,6 +113,24 @@ async function getme(req, res) {
            user
         })
 }
+
+async function verifyToken(req, res) {
+    const token = req.cookies.token
+
+    const isblacklisted = await redis.get(token);
+
+    if (isblacklisted) {
+        return res.status(401).json({
+            message: "unauthorized"
+        })
+    }
+
+   const decode = jwt.verify(token, process.env.JWT_SECRET);
+    
+    return res.status(200).json({
+        user:decode
+    })
+}
     
 async function logout(req,res) {
     
@@ -132,5 +150,6 @@ module.exports = {
      register,
     login,
     getme,
-    logout
+    logout,
+    verifyToken
 }

@@ -18,7 +18,9 @@ AuthRouter.post('/login', authController.login)
 
 AuthRouter.get('/getme', identifyUser, authController.getme);
 
-AuthRouter.get("/logout",authController.logout)
+AuthRouter.get("/logout", authController.logout)
+
+AuthRouter.get("/verify",authController.verifyToken)
 
 
 

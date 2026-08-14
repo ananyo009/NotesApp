@@ -1,9 +1,8 @@
-import { createBrowserRouter,Navigate } from 'react-router';
+import { createBrowserRouter, Navigate } from 'react-router';
 import Login from '../auth/components/Login';
 import Register from '../auth/components/Register';
 import Home from '../notes/component/Home';
-import ProtectedRoute from '../notes/component/ProtectedRoute';
-
+import ProtectedRoute from './ProtectedRoute';
 
 export const Approuter = createBrowserRouter([
     {
@@ -11,21 +10,21 @@ export const Approuter = createBrowserRouter([
         element: <Navigate to='/login' replace />
     },
     {
-    path: '/login',
+        path: '/login',
         element: <Login />
     },
-     {
-                path: '/register',
-                element: <Register />
-            },
     {
-        element: <ProtectedRoute />,
-        children: [
-            {
-                path: '/home',
-                element: <Home />
-            }
-        ]
-    }])
+        path: '/register',
+        element: <Register />
+    },
+    {
+        path: '/home',
+        element: (
+            <ProtectedRoute>
+                <Home />
+            </ProtectedRoute>
+        )
+    }
+]);
 
 
