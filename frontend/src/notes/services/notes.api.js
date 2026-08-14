@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: "https://notes-app-seven-lyart.vercel.app/notesApp/notes",
+  baseURL: "https://notes-app-seven-lyart.vercel.app/notesApp",
   withCredentials: true,
 });
 
