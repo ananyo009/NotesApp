@@ -12,7 +12,7 @@ const ProtectedRoute = ({ children }) => {
     const verifyAuth = async () => {
       try {
         await axios.get(
-          "https://notes-app-seven-lyart.vercel.app/notesApp/verify",
+          "https://notes-app-seven-lyart.vercel.app/notesApp/auth/verify",
           {
             withCredentials: true,
           },
