@@ -162,11 +162,16 @@ async function verifyToken(req, res) {
     }
 }
 
-async function logout(req,res) {
-    
-    const token = req.cookies.token;
+async function logout(req, res) {
+    const token = req.cookies?.token;
+    const isProduction = process.env.NODE_ENV === 'production';
 
-    res.clearCookie("token");
+    res.clearCookie('token', {
+        path: '/',
+        httpOnly: true,
+        sameSite: isProduction ? 'none' : 'lax',
+        secure: isProduction,
+    });
 
     if (token && redis.status === 'ready') {
         try {
@@ -177,9 +182,8 @@ async function logout(req,res) {
     }
 
     return res.status(201).json({
-        message:"logged out successfully"
-    })
-
+        message: 'logged out successfully'
+    });
 }
 
 module.exports = {
