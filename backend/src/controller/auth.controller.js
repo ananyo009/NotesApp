@@ -118,6 +118,19 @@ async function getme(req, res) {
         })
 }
 
+const getBlacklistStatus = async (token) => {
+    if (!token || redis.status !== 'ready') {
+        return false;
+    }
+
+    try {
+        const result = await redis.get(token);
+        return Boolean(result);
+    } catch (error) {
+        return false;
+    }
+};
+
 async function verifyToken(req, res) {
     try {
         const token = req.cookies?.token;
@@ -128,7 +141,7 @@ async function verifyToken(req, res) {
             });
         }
 
-        const isBlacklisted = await redis.get(token);
+        const isBlacklisted = await getBlacklistStatus(token);
 
         if (isBlacklisted) {
             return res.status(401).json({
@@ -148,14 +161,20 @@ async function verifyToken(req, res) {
         });
     }
 }
-    
+
 async function logout(req,res) {
     
     const token = req.cookies.token;
 
     res.clearCookie("token");
 
-    await redis.set(token,Date.now().toString(),'Ex',60*60);
+    if (token && redis.status === 'ready') {
+        try {
+            await redis.set(token, Date.now().toString(), 'EX', 60 * 60);
+        } catch (error) {
+            console.log('Redis logout skipped:', error.message);
+        }
+    }
 
     return res.status(201).json({
         message:"logged out successfully"

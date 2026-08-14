@@ -1,6 +1,19 @@
 const jwt = require('jsonwebtoken');
 const redis = require('../config/cache');
 
+const getBlacklistStatus = async (token) => {
+    if (!token || redis.status !== 'ready') {
+        return false;
+    }
+
+    try {
+        const result = await redis.get(token);
+        return Boolean(result);
+    } catch (error) {
+        return false;
+    }
+};
+
 const identifyUser = async (req, res, next) => {
     try {
         const token = req.cookies?.token;
@@ -9,7 +22,7 @@ const identifyUser = async (req, res, next) => {
             return res.status(401).json({ message: 'Unauthorized' });
         }
 
-        const isTokenBlacklisted = await redis.get(token);
+        const isTokenBlacklisted = await getBlacklistStatus(token);
 
         if (isTokenBlacklisted) {
             return res.status(401).json({
