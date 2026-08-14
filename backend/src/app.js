@@ -15,6 +15,7 @@ const app = express();
 const allowedOrigins = [
   process.env.FRONTEND_URL,
   'https://notes-app-j8te.vercel.app',
+  'https://notes-app-seven-lyart.vercel.app',
   'http://localhost:5173',
   'http://127.0.0.1:5173',
 ].filter(Boolean);

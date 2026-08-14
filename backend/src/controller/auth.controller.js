@@ -119,21 +119,34 @@ async function getme(req, res) {
 }
 
 async function verifyToken(req, res) {
-    const token = req.cookies.token
+    try {
+        const token = req.cookies?.token;
 
-    const isblacklisted = await redis.get(token);
+        if (!token) {
+            return res.status(401).json({
+                message: 'unauthorized'
+            });
+        }
 
-    if (isblacklisted) {
+        const isBlacklisted = await redis.get(token);
+
+        if (isBlacklisted) {
+            return res.status(401).json({
+                message: 'unauthorized'
+            });
+        }
+
+        const decode = jwt.verify(token, process.env.JWT_SECRET);
+
+        return res.status(200).json({
+            user: decode
+        });
+    } catch (error) {
         return res.status(401).json({
-            message: "unauthorized"
-        })
+            message: 'unauthorized',
+            error: error.message
+        });
     }
-
-   const decode = jwt.verify(token, process.env.JWT_SECRET);
-    
-    return res.status(200).json({
-        user:decode
-    })
 }
     
 async function logout(req,res) {
